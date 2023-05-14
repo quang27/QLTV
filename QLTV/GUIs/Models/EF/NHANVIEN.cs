@@ -30,6 +30,9 @@ namespace GUIs.Models.EF
         [StringLength(11)]
         public string SDT { get; set; }
 
+        [StringLength(250)]
+        public string Anh { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MUONTRA> MUONTRA { get; set; }
 

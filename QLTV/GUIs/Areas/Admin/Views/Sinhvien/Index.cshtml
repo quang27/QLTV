@@ -1,58 +1,79 @@
-﻿@model IEnumerable<GUIs.Models.EF.SINHVIEN>
-
-@{
+﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
 }
 
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
+     @Html.DropDownList("Lopid",new SelectList(ViewBag.Lops,"Id","Tenlop"),new { @class="form-control"})
 </p>
+<span id="mess"></span>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MaSV)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HoTen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgaySinh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pass)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th></th>
-    </tr>
+    <thead>
+        <tr>
+            <th>
+                TT
+            </th>
+            <th>
+                Ho Ten
+            </th>
+            <th>
+                MSSV
+            </th>
+            <th>
+                Lop
+            </th>
+            <th>
+                Ngay Sinh
+            </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaSV)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoTen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgaySinh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pass)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+            <th> UserName</th>
+            <th> Chinh Sua</th>
+            <th> Xoa</th>
+        </tr>
+    </thead>
+    <tbody id="tbData">
+
+    </tbody>
 
 </table>
+@section scripts{
+    <script>
+        var Sinhvien = {
+            init: function () {
+                Sinhvien.Lopchange();
+                $("#Lopid").change(function () {
+                    Sinhvien.Lopchange();
+                });
+            },
+            Lopchange: function () {
+                var lopid = $("#Lopid").val();
+                $.ajax({
+                    url: '/Admin/Sinhvien/getSinhvien/' + lopid,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (res) {
+                        $("#tbData").html(res.data);
+                        $("#mess").html(res.mess);
+                    }
+                })
+            },
+            Delete: function (id) {
+                alert(id);
+                $.ajax({
+                    url: '/Admin/Sinhvien/Delete/' + id,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (res) {
+                        alert(res.result);
+                        Sinhvien.Lopchange();
+                    }
+                })
+            }
+        }
+        Sinhvien.init();
+    </script>
+    
+    }

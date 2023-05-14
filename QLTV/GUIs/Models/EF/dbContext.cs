@@ -11,7 +11,8 @@ namespace GUIs.Models.EF
             : base("name=dbContext")
         {
         }
-        //Asp.net COre 2.0
+
+        public virtual DbSet<LOP> LOP { get; set; }
         public virtual DbSet<MUONTRA> MUONTRA { get; set; }
         public virtual DbSet<NHANVIEN> NHANVIEN { get; set; }
         public virtual DbSet<NHAXUATBAN> NHAXUATBAN { get; set; }
@@ -24,6 +25,10 @@ namespace GUIs.Models.EF
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<LOP>()
+                .Property(e => e.TenLop)
+                .IsFixedLength();
+
             modelBuilder.Entity<NHANVIEN>()
                 .Property(e => e.Pass)
                 .IsFixedLength();
@@ -52,8 +57,9 @@ namespace GUIs.Models.EF
                 .HasForeignKey(e => e.NXBId);
 
             modelBuilder.Entity<PHANLOAISACH>()
-                .HasOptional(e => e.SACH)
-                .WithRequired(e => e.PHANLOAISACH);
+                .HasMany(e => e.SACH)
+                .WithOptional(e => e.PHANLOAISACH)
+                .HasForeignKey(e => e.PhanLoaiId);
 
             modelBuilder.Entity<SACH>()
                 .Property(e => e.Noi_dung)

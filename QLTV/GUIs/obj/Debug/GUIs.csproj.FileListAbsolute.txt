@@ -76,8 +76,8 @@ D:\Project\Du An Thu vien\QLTV\QLTV\GUIs\bin\System.Web.WebPages.Razor.xml
 D:\Project\Du An Thu vien\QLTV\QLTV\GUIs\bin\Newtonsoft.Json.xml
 D:\Project\Du An Thu vien\QLTV\QLTV\GUIs\bin\Antlr3.Runtime.pdb
 D:\Project\Du An Thu vien\QLTV\QLTV\GUIs\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Project\Du An Thu vien\QLTV\QLTV\GUIs\obj\Debug\GUIs.csproj.AssemblyReference.cache
 D:\Project\Du An Thu vien\QLTV\QLTV\GUIs\obj\Debug\GUIs.csproj.CoreCompileInputs.cache
 D:\Project\Du An Thu vien\QLTV\QLTV\GUIs\obj\Debug\GUIs.csproj.CopyComplete
 D:\Project\Du An Thu vien\QLTV\QLTV\GUIs\obj\Debug\GUIs.dll
 D:\Project\Du An Thu vien\QLTV\QLTV\GUIs\obj\Debug\GUIs.pdb
+D:\Project\Du An Thu vien\QLTV\QLTV\GUIs\obj\Debug\GUIs.csproj.AssemblyReference.cache

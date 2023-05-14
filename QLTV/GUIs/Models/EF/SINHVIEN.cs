@@ -17,6 +17,7 @@ namespace GUIs.Models.EF
 
         public int ID { get; set; }
 
+        [StringLength(15)]
         public string MaSV { get; set; }
 
         [StringLength(50)]
@@ -30,6 +31,10 @@ namespace GUIs.Models.EF
 
         [StringLength(20)]
         public string UserName { get; set; }
+
+        public int? LopID { get; set; }
+
+        public virtual LOP LOP { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MUONTRA> MUONTRA { get; set; }

@@ -1,0 +1,74 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Index</h2>
+@ViewBag.thongbao
+<p>
+    @Html.ActionLink("Create New", "Create")
+    <br />
+    <label>Ten nhan vien</label>
+    <input type="text" placeholder="Ten Nha Xuat Ban " id="tennxb" />
+    <button class="btn btn-primary" id="search">Tim kiem</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+           STT
+        </th>
+        <th>
+            Ten NXB
+        </th>
+        <th>
+          Dia Chi
+        </th>
+        <th>
+           Chinh Sua
+        </th>
+        <th>Xoa</th>
+        
+    </tr>
+    <tbody id="tbData">
+        
+    </tbody>
+    
+
+</table>
+@section scripts{
+<script>
+
+
+    var nxb = {
+        init: function () {
+            nxb.search();
+            $("#search").click(function () {
+                nxb.search();
+            });
+        },
+        search: function () {
+            var tennxb = $("#tennxb").val();
+            var form = new FormData()
+            form.append("Tennxb", tennxb);
+            form.append("Diachi", "");
+
+           $.ajax({
+                type: 'POST',
+               dataType: 'Json',
+               contentType: false,
+               processData: false,
+               data: form,
+               url: '/Admin/NhaXuatBan/Search/',
+               success: function (res) {
+                   $("#tbData").html(res.data);
+
+               },
+            });
+        }
+    }
+    nxb.init();
+
+</script>
+    }

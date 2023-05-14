@@ -16,7 +16,6 @@ namespace GUIs.Models.EF
             TACGIASACH = new HashSet<TACGIASACH>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         [StringLength(150)]

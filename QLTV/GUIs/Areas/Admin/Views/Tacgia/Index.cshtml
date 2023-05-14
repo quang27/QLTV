@@ -1,0 +1,62 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    <br />
+    <input type="text" id="tentacgia" placeholder="Ten Tac Gia" />
+    <button class="btn btn-primary" id="search">Tim Kiem</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+           STT
+        </th>
+        <th> Ten tac Gia</th>
+        <th>
+            Chinh Sua
+        </th>
+        <th>
+            Xoa
+        </th>
+    </tr>
+    <tbody id="tbData">
+
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        var tacgia = {
+            init: function () {
+                tacgia.search();
+                $("#search").click(function () {
+                    tacgia.search();
+                });
+            },
+            search: function () {
+                var ten = $("#tentacgia").val();
+                var form = new FormData();
+                form.append("ten", ten);
+
+                $.ajax({
+                    type:'POST',
+                    dataType: 'Json',
+                    contentType: false,
+                    processData: false,
+                    data: form,
+                    url: '/Admin/Tacgia/Search/',
+                    success: function (res) {
+                        $("#tbData").html(res.data);
+                    },
+                });
+            }
+        }
+        tacgia.init();
+    </script>
+    }

@@ -15,12 +15,10 @@ namespace GUIs.Models.EF
             MUONTRA = new HashSet<MUONTRA>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int MaSach { get; set; }
-
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int MaCT { get; set; }
+
+        public int MaSach { get; set; }
 
         [StringLength(100)]
         public string Tinhtrang { get; set; }

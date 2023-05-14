@@ -19,5 +19,7 @@ namespace GUIs.Models.VIEW
         public string Password { get; set; }
 
         public string Username { get; set; }
+        public int LopID { get; set; }
+        public string Tenlop { get;  set; }
     }
 }

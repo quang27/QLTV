@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Index</h2>
+@ViewBag.thongbao
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+   
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            STT
+        </th>
+        <th>
+            Ten Lop
+        </th>
+        <th>Chinh Sua</th>
+        <th>Xoa</th>
+    </tr>
+    @Html.Raw(ViewBag.danhsach)
+
+</table>

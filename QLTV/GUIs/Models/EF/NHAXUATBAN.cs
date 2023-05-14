@@ -15,12 +15,10 @@ namespace GUIs.Models.EF
             SACH = new HashSet<SACH>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         [StringLength(50)]
         public string TenNXB { get; set; }
-       
 
         [StringLength(50)]
         public string DiaChi { get; set; }

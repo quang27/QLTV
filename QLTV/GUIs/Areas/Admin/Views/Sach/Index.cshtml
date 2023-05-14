@@ -1,0 +1,91 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    <br />
+    <input type="text" id="tensach" placeholder="Ten sach" />
+
+
+    @Html.DropDownList("NhaXuatBan", new SelectList(ViewBag.listnxb, "ID", "TenNXB"), new { @class = "form-control" })
+    @Html.DropDownList("PhanLoai",new SelectList(ViewBag.listphanloai,"ID", "TenPhanLoai"), new {@class="form-control"})
+
+  
+    
+</p>
+<table class="table">
+    <tr>
+        <th>
+            STT
+        </th>
+        <th>
+            Ten Sach
+        </th>
+        <th>
+            Phan Loai
+        </th>
+        <th>
+            Ten nha xuat ban
+        </th>
+        <th>
+            Gia Tien
+        </th>
+        <th>
+            Anh Bia
+        </th>
+
+        <th>Chinh Sua</th>
+        <th> Xoa</th>
+    </tr>
+    <tbody id="tbData"></tbody>
+</table>
+@section scripts{
+    <script>
+
+
+    var sach= {
+        init: function () {
+            sach.search();
+            $("#tensach").change(function () {
+                sach.search();
+            });
+            $("#NhaXuatBan").change(function () {
+                sach.search();
+            });
+            $("#PhanLoai").change(function () {
+                sach.search();
+            });
+        },
+        search: function () {
+            var tensach = $("#tensach").val();
+            var phanloai = $("#PhanLoai").val();
+            var nxb = $("#NhaXuatBan").val();
+            var form = new FormData()
+            form.append("tensach", tensach);
+            form.append("phanloai", phanloai);
+            form.append("nhaxb", nxb);
+           $.ajax({
+                type: 'POST',
+               dataType: 'Json',
+               contentType: false,
+               processData: false,
+               data: form,
+               url: '/Admin/Sach/Search/',
+               success: function (res) {
+                   $("#tbData").html(res.data);
+
+
+               },
+            });
+        }
+    }
+    sach.init();
+
+    </script>
+    }

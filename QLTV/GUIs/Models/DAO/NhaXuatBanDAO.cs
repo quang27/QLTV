@@ -36,22 +36,29 @@ namespace GUIs.Models.DAO
                          }).FirstOrDefault();
             return query;
         }
-        public List<NHAXUATBAN> getList()
+        public List<NhaXuatBanVIEW> getList()
         {
-            var ds = this.context.NHAXUATBAN.ToList();
-            return ds;
+            var query = (from a in context.NHAXUATBAN
+                        
+                         select new NhaXuatBanVIEW
+                         {
+                             ID = a.ID,
+                             TenNXB = a.TenNXB,
+                             DiaChi = a.DiaChi
+                         }).ToList();
+            return query;
         }
-        public void Edit(NHAXUATBAN x)
+       
+        public List<NhaXuatBanVIEW> Search(String tenNXB="")
         {
-            NHAXUATBAN nxb = getItem(x.ID);
-            nxb.TenNXB= x.TenNXB;
-            nxb.DiaChi = x.DiaChi;
-            context.SaveChanges();
-        }
-        public List<NHAXUATBAN> Search(String tenNXB, string diachi)
-        {
-
-            var query = context.NHAXUATBAN.Where(x => x.TenNXB.Contains(tenNXB)).ToList();
+            var query = (from a in context.NHAXUATBAN
+                         where (a.TenNXB.Contains(tenNXB))
+                         select new NhaXuatBanVIEW
+                         {
+                             ID = a.ID,
+                             TenNXB = a.TenNXB,
+                             DiaChi = a.DiaChi
+                         }).ToList();
             return query;
         }
         public void Delete(int id)

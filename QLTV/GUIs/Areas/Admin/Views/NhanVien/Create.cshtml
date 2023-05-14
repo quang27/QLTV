@@ -1,0 +1,147 @@
+﻿@model GUIs.Models.VIEW.NhanVienVIEW
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="card">
+    <div class="card-header">
+        Thêm nhân viên
+    </div>
+    <div class="card-body">
+        <div class="row p-10">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Tên nhân viên
+                        </span>
+                    </div>
+                    @Html.EditorFor(model => model.TenNV, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            SDT
+                        </span>
+                    </div>
+                    @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+        </div>
+        <div class="row p-10">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Email
+                        </span>
+                    </div>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            PassWord
+                        </span>
+                    </div>
+                    @Html.EditorFor(model => model.Pass, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Ảnh
+                        </span>
+                    </div>
+                    <input type="file" accept="image/*" id="file" class="form-control" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-5"></div>
+            <div class="col-4">
+                <input type="button" id="btSave" value="Create" class="btn btn-primary" />
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+</div>
+        <div class="card-footer">
+
+        </div>
+        
+    
+
+    <div class="card">
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+               
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section scripts{
+    <script>
+        var Nhanvien = {
+            init: function () {
+                $("#btSave").click(function () {
+                    Nhanvien.save();
+                })
+            },
+            save: function () {
+                var TenNV = $("#TenNV").val();
+                var Email = $("#Email").val();
+                var SDT = $("#SDT").val();
+                var Pass = $("#Pass").val();
+                alert('1');
+                var fileInput = $('#file').get(0);
+                alert(fileInput);
+                if (fileInput.files[0] == null) {
+                    alert('Chua chon anh');
+                    return;
+                }
+                var form = new FormData()
+                form.append("TenNV", TenNV);
+                form.append("Email", Email);
+                form.append("SDT", SDT);
+                form.append("Pass", Pass);
+                form.append("Anh", fileInput.files[0]);
+                alert(2);
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'Json',
+                    contentType: false,
+                    processData: false,
+                    data: form,
+                    url: '/Admin/Nhanvien/Create/',
+                    success: function (res) {
+                        alert(res.result);
+
+                    },
+                });
+            }
+        }
+        Nhanvien.init();
+    </script>
+    }

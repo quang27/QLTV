@@ -27,6 +27,7 @@ namespace GUIs.Models.DAO
         {
             //LinQ
             var query = (from a in context.SINHVIEN
+                         join b in context.LOP on a.LopID equals b.ID
                           where a.ID == id
                           select new SinhvienVIEW
                           {
@@ -34,32 +35,45 @@ namespace GUIs.Models.DAO
                               Hoten = a.HoTen,
                               MaSV = a.MaSV,
                               Ngaysinh = a.NgaySinh,
-                              Username = a.UserName
+                              Username = a.UserName,
+                              Tenlop = b.TenLop
                           }).FirstOrDefault();
             return query;
         }
-        public List<SINHVIEN> getList()
+        public List<SinhvienVIEW> getList(int id)
             {
-            var ds = this.context.SINHVIEN.ToList();
-            return ds;
+            var query = (from a in context.SINHVIEN   
+                         join b in context.LOP on a.LopID equals b.ID
+                         where b.ID==id
+                         select new SinhvienVIEW
+                         {
+                             ID = a.ID,
+                             Hoten = a.HoTen,
+                             MaSV = a.MaSV,
+                             Tenlop=b.TenLop,
+                             Ngaysinh = a.NgaySinh,
+                             Username = a.UserName
+                         }).ToList();
+            return query;
         }
-        public void Add(SINHVIEN sinhvien)
-        {
-            context.SINHVIEN.Add(sinhvien);
-            context.SaveChanges();
-        }
-        public void Edit(SINHVIEN sv)
-        {
-            SINHVIEN x = getItem(sv.ID);
-            x.UserName = sv.UserName;
-            x.Pass = sv.Pass;
-            context.SaveChanges();
-        }
+        
+        
 
-        public List<SINHVIEN> Search(String mssv)
+        public List<SinhvienVIEW> Search(String mssv)
         {
 
-            var query = context.SINHVIEN.Where(x => x.MaSV.Contains(mssv)).ToList();
+            var query = (from a in context.SINHVIEN.Where(x => x.MaSV.Contains(mssv))
+                         join b in context.LOP on a.LopID equals b.ID
+                         select new SinhvienVIEW
+                         {
+                             ID = a.ID,
+                             Hoten = a.HoTen,
+                             MaSV = a.MaSV,
+                             Tenlop = b.TenLop,
+                             Ngaysinh = a.NgaySinh,
+                             Username = a.UserName
+                         }
+                         ).ToList();
             return query;
         }
         public void Detele(int id)
