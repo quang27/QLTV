@@ -1,0 +1,30 @@
+﻿@model IEnumerable<GUIs.Models.VIEW.TacgiasachVIEW>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+          STT
+        </th>
+        <th>
+         Ma sach
+        </th>
+        <th>
+            Ma Tac Gia
+        </th>
+        <th>Chinh SUa</th>
+        <th>Xoa</th>
+    </tr>
+    @Html.Raw(ViewBag.danhsach)
+
+
+</table>

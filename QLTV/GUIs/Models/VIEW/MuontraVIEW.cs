@@ -30,6 +30,6 @@ namespace GUIs.Models.VIEW
 
         public int? NVTraId { get; set; }
         public string Nhanviennhantra { set; get; }
-        public bool Baomat { get; set; }
+        public bool? Baomat { get; set; }
     }
 }

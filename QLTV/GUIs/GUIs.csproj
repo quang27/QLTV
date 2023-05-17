@@ -131,6 +131,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LopController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MuontraController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhanVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhaXuatBanController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhanloaisachController.cs" />
@@ -145,6 +146,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DAO\LopDAO.cs" />
+    <Compile Include="Models\DAO\MuontraDAO.cs" />
     <Compile Include="Models\DAO\NhanVienDAO.cs" />
     <Compile Include="Models\DAO\NhaXuatBanDAO.cs" />
     <Compile Include="Models\DAO\PhanloaisachDAO.cs" />
@@ -2476,6 +2478,10 @@
     <Content Include="Areas\Admin\Views\Phanloaisach\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Phanloaisach\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Phanloaisach\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tacgiasach\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tacgiasach\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Tacgiasach\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Tacgiasach\Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2505,7 +2511,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Tacgiasach\" />
+    <Folder Include="Areas\Admin\Views\Muontra\" />
     <Folder Include="Areas\Quantri\Data\" />
     <Folder Include="Areas\Quantri\Views\Shared\" />
     <Folder Include="Uploads\Avata\" />

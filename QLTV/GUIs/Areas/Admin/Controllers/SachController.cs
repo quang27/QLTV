@@ -48,6 +48,15 @@ namespace GUIs.Areas.Admin.Controllers
             sach.InsertOrUpdate(item);
             return RedirectToAction("Index");
         }
+        public JsonResult Themtacgia(int sachid, int tacgiaid)
+        {
+            TacgiasachDAO tacgiasach = new TacgiasachDAO();
+            var item = new TACGIASACH();
+            item.TacgiaId = tacgiaid;
+            item.MaSach = sachid;
+            tacgiasach.InsertOrUpdate(item);
+            return Json(new { mess = "them thanh cong" }, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public JsonResult Save(string Tensach,int Giatien,string tomtat,string noidung,string anhbia)
         {
@@ -66,6 +75,41 @@ namespace GUIs.Areas.Admin.Controllers
             item.Noi_dung = noidung;
             sach.InsertOrUpdate(item);
             return Json(new { result = "Cập nhật thành công"}, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Laydanhsachtacgia(int id)
+        {
+            TacgiasachDAO tacgiasach = new TacgiasachDAO();
+            var query = tacgiasach.getList(id);
+            int i = 1;
+            String text = "";
+            foreach (var item in query)
+            {
+                text += "<tr>";
+                text += "<td>" + i++ + "</td>";
+                text += "<td>" + item.Tensach + "</td>";
+                text += "<td>" + item.Tentacgia + "</td>";
+                text += "<td> <a href='/Admin/Lop/Edit/" + item.ID + "'><i class='fa fa-edit' aria-hidden='true'></i> </td>";
+                text += "<td> <a href='/Admin/Lop/Delete/" + item.ID + "'><i class='fa fa-trash' aria-hidden='true'></i> </td>";
+                text += "</tr>";
+            }
+            string tacgia_html = "";
+            TacgiaDAO tacgia = new TacgiaDAO();
+            var queryy = tacgia.getList("");
+            foreach(var item in queryy)
+            {
+                tacgia_html += "<option value=" + item.ID + ">" + item.Tentacgia + "</option>";
+            }
+            return Json(new { data = text,tacgia=tacgia_html }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Themtacgiasach(int idsach,int idtacgia)
+       
+        {
+            TacgiasachDAO tacgiasach = new TacgiasachDAO();
+            var item = new TACGIASACH();
+            item.TacgiaId = idtacgia;
+            item.MaSach = idsach;
+            tacgiasach.InsertOrUpdate(item);
+            return Json(new { mess="them thanh cong"});
         }
         public ActionResult Edit(int? id)
         {
@@ -113,7 +157,9 @@ namespace GUIs.Areas.Admin.Controllers
                 text += "<td>" + item.GiaTien + "</td>";
                 text += "<td>" + item.AnhBia+ "</td>";
                 text += "<td><a href='/Admin/Sach/Edit/" + item.ID + "'><i class='fa fa-edit' aria-hidden='true'></i></td>";
-                text += "<td><a href='/Admin/Sach/Delete/" + item.ID + "'><i class='fa fa-trash' aria-hidden='true'></i></td>";               
+                text += "<td>"+
+                    "<a href='javacript:void(0)' onclick='sach.themtacgia(" + item.ID + ")' data-toggle='modal' data-target='#themtacgia' data-whatever='" + item.ID + "'><i class='fa fa-user'></i></a>"+
+                    "<a href='/Admin/Sach/Delete/" + item.ID + "'><i class='fa fa-trash' aria-hidden='true'></i></td>";               
                 text += "</tr>";
             }
             return Json(new {data=text },JsonRequestBehavior.AllowGet);

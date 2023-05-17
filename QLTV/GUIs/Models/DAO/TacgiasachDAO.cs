@@ -34,13 +34,18 @@ namespace GUIs.Models.DAO
                          }).FirstOrDefault();
             return query;
         }
-        public List<TacgiasachVIEW> getList()
+        public List<TacgiasachVIEW> getList(int id)
         {
             var query = (from a in context.TACGIASACH
+                         join b in context.TACGIA on a.TacgiaId equals b.ID
+                         join c in context.SACH on a.MaSach equals c.ID
+                         where (a.MaSach==id)
                          select new TacgiasachVIEW
                          {
                              ID = a.ID,
                              MaSach = a.MaSach,
+                             Tentacgia = b.Tentacgia,
+                             Tensach=c.TenSach,
                              TacgiaId = a.TacgiaId
                          }).ToList();
             return query;

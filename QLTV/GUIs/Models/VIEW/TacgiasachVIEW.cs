@@ -12,5 +12,7 @@ namespace GUIs.Models.VIEW
         public int? MaSach { get; set; }
 
         public int? TacgiaId { get; set; }
+        public String Tentacgia { set; get; }
+        public String Tensach { set; get; }
     }
 }
