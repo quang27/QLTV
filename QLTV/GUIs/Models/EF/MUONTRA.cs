@@ -9,7 +9,6 @@ namespace GUIs.Models.EF
     [Table("MUONTRA")]
     public partial class MUONTRA
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         public int? SVId { get; set; }
@@ -31,6 +30,8 @@ namespace GUIs.Models.EF
         public int? NVTraId { get; set; }
 
         public bool? Baomat { get; set; }
+
+        public DateTime? Hantra { get; set; }
 
         public virtual NHANVIEN NHANVIEN { get; set; }
 

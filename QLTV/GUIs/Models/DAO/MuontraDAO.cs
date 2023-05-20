@@ -45,11 +45,18 @@ namespace GUIs.Models.DAO
         public List<MuontraVIEW> getList()
         {
             var query = (from a in context.MUONTRA
-
+                         join b in context.SACHCHITIET on a.SachCTId equals b.MaCT
+                         join c in context.SACH on b.MaSach equals c.ID
+                         join d in context.TACGIASACH on c.ID equals d.MaSach
+                         join e in context.TACGIA on d.TacgiaId equals e.ID
+                         join f in context.SINHVIEN on a.SVId equals f.ID
                          select new MuontraVIEW
                          {
                              ID = a.ID,
                              SVId = a.SVId,
+                             Tensach = c.TenSach,
+                             HotenSv =f.HoTen,
+                             Tentacgia=e.Tentacgia,
                              SachCTId = a.SachCTId,
                              NgayMuon = a.NgayMuon,
                              NgayTra = a.NgayTra,
@@ -57,7 +64,8 @@ namespace GUIs.Models.DAO
                              TinhTrangTra = a.TinhTrangTra,
                              NVMuonId = a.NVMuonId,
                              NVTraId = a.NVTraId,
-                             Baomat = a.Baomat
+                             Baomat = a.Baomat,
+                             Hantra=a.Hantra
                          }).ToList();
             return query;
         }

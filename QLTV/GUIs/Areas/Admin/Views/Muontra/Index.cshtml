@@ -1,0 +1,67 @@
+﻿@model IEnumerable<GUIs.Models.VIEW.MuontraVIEW>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                STT
+            </td>
+            <td>
+                sinh vien
+            </td>
+            <td>
+                Ten sach
+            </td>
+            <td>
+                ten tac gia
+            </td>
+            <td>
+                ngay muon
+            </td>
+            <td>
+                ngay tra
+            </td>
+            <td>
+                tinh trang muon
+            </td>
+            <td>
+                tinh trang tra
+            </td>
+            
+        </tr>
+    </thead>
+   <tbody id="tbData">
+
+   </tbody>
+
+</table>
+@section scripts{
+    <script>
+        var muontra = {
+            init: function () {
+                muontra.loadmuontra();
+            },
+            loadmuontra: function () {
+                $.ajax({
+                    type: 'get',
+                    dataType: 'JSON',
+                    url: '/Admin/Muontra/Search/',
+                    success: function (res) {
+                        $("#tbData").html(res.data);
+                    }
+                });
+            }
+        }
+        muontra.init();
+    </script>
+    }

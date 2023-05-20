@@ -158,7 +158,7 @@ namespace GUIs.Areas.Admin.Controllers
                 text += "<td>" + item.AnhBia+ "</td>";
                 text += "<td><a href='/Admin/Sach/Edit/" + item.ID + "'><i class='fa fa-edit' aria-hidden='true'></i></td>";
                 text += "<td>"+
-                    "<a href='javacript:void(0)' onclick='sach.themtacgia(" + item.ID + ")' data-toggle='modal' data-target='#themtacgia' data-whatever='" + item.ID + "'><i class='fa fa-user'></i></a>"+
+                    "<a href='javacript:void(0)' onclick='sach.themtacgia(" + item.ID + ")' data-toggle='modal' data-target='#themtacgia' data-whatever='" + item.ID + "'><i class='fa fa-user'></i></a>"+"</td><td>"+
                     "<a href='/Admin/Sach/Delete/" + item.ID + "'><i class='fa fa-trash' aria-hidden='true'></i></td>";               
                 text += "</tr>";
             }

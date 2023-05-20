@@ -2482,6 +2482,8 @@
     <Content Include="Areas\Admin\Views\Tacgiasach\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Tacgiasach\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Tacgiasach\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Muontra\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Muontra\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2511,7 +2513,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Muontra\" />
     <Folder Include="Areas\Quantri\Data\" />
     <Folder Include="Areas\Quantri\Views\Shared\" />
     <Folder Include="Uploads\Avata\" />

@@ -14,7 +14,7 @@ namespace GUIs.Models.VIEW
 
         public int? SachCTId { get; set; }
         public string Tensach { set; get; }
-
+        public string Tentacgia { set; get; }
         public DateTime? NgayMuon { get; set; }
 
         public DateTime? NgayTra { get; set; }
@@ -31,5 +31,6 @@ namespace GUIs.Models.VIEW
         public int? NVTraId { get; set; }
         public string Nhanviennhantra { set; get; }
         public bool? Baomat { get; set; }
+        public DateTime? Hantra { get; set; }
     }
 }

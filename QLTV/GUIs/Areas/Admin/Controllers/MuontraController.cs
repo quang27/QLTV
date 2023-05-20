@@ -12,7 +12,12 @@ namespace GUIs.Areas.Admin.Controllers
     public class MuontraController : Controller
     {
         // GET: Admin/Muontra
-        public ActionResult Index()
+
+        public ActionResult Index() 
+        {
+            return View();
+        }
+        public JsonResult Search()
         {
             MuontraDAO muontra = new MuontraDAO();
             var query = muontra.getList();
@@ -24,17 +29,18 @@ namespace GUIs.Areas.Admin.Controllers
                 text += "<td>"+ i++ +"</td>";
                 text += "<td>"+ item.HotenSv +"</td>";
                 text += "<td>" + item.Tensach + "</td>";
+                text += "<td>" + item.Tentacgia + "</td>";
                 text += "<td>" + item.NgayMuon + "</td>";
                 text += "<td>" + item.NgayTra + "</td>";
                 text += "<td>" + item.TinhTrangMuon + "</td>";
                 text += "<td>" + item.TinhTrangTra + "</td>";
-                text += "<td>" + item.Nhanvienchomuon + "</td>";
-                text += "<td>" + item.Nhanviennhantra + "</td>";
-                text += "<td>" + item.Baomat + "</td>";
+               
+               
                 text += "</tr>";
             }
-            ViewBag.ds = text;
-            return View();
+
+            return Json(new { data=text},JsonRequestBehavior.AllowGet);
+
         }
         public ActionResult Create()
         {
@@ -50,8 +56,28 @@ namespace GUIs.Areas.Admin.Controllers
             item.NgayMuon = model.NgayMuon;
             item.NgayTra = model.NgayTra;
             item.TinhTrangMuon = model.TinhTrangMuon;
-            item.NgayTra = model.NgayTra;
+            item.TinhTrangTra = model.TinhTrangTra;
+            item.NVMuonId = model.NVMuonId;
+            item.NVTraId = model.NVTraId;
+            item.Baomat = model.Baomat;
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Trasach()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Trasach(MuontraVIEW model)
+        {
+            {
+                MuontraDAO muontra = new MuontraDAO();
+                MUONTRA item = new MUONTRA();
+                item.SVId = model.SVId;
+                item.SachCTId = model.SachCTId;
+                item.NgayMuon = item.NgayMuon;
+            }
+            return View();
         }
     }
 }
