@@ -32,5 +32,8 @@ namespace GUIs.Models.VIEW
         public string Nhanviennhantra { set; get; }
         public bool? Baomat { get; set; }
         public DateTime? Hantra { get; set; }
+        public String Tenlop { get; set; }
+        public bool Tinhtrangthe { get; set; }
+        public String MSSV { set; get; }
     }
 }

@@ -40,11 +40,33 @@ namespace GUIs.Models.DAO
                           }).FirstOrDefault();
             return query;
         }
-        public List<SinhvienVIEW> getList(int id)
+        public SinhvienVIEW getItemView(string  MaSv)
+        {
+            //LinQ
+            var query = (from a in context.SINHVIEN
+                         join b in context.LOP on a.LopID equals b.ID
+                         where a.MaSV == MaSv
+                         select new SinhvienVIEW
+                         {
+                             ID = a.ID,
+                             Hoten = a.HoTen,
+                             MaSV = a.MaSV,
+                             Ngaysinh = a.NgaySinh,
+                             Username = a.UserName,
+                             Tenlop = b.TenLop
+                         }).FirstOrDefault();
+            return query;
+        }
+        /// <summary>
+        /// Lấy sinh viên theo mã lớp
+        /// </summary>
+        /// <param name="Lopid">Mã lớp</param>
+        /// <returns></returns>
+        public List<SinhvienVIEW> getList(int Lopid)
             {
             var query = (from a in context.SINHVIEN   
                          join b in context.LOP on a.LopID equals b.ID
-                         where b.ID==id
+                         where b.ID==Lopid
                          select new SinhvienVIEW
                          {
                              ID = a.ID,

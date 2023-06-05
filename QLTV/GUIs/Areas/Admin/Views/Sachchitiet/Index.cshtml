@@ -1,0 +1,132 @@
+﻿@model GUIs.Models.VIEW.SachVIEW
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12 p-1">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Mã sách
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" id="Masach" placeholder="Nhập mã sách" readonly="readonly" value="" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 p-1">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Ten sach
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" id="Masach" placeholder="Ten Sach" readonly="readonly" value="@Model.TenSach" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 p-1">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            NXB
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" id="Masach" readonly="readonly" value="@Model.TenNxb" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 p-1">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Tac gia
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" id="Masach" placeholder="Nhập Tac gia" value="@Model.GiaTien" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+
+        <div class="row">
+            <div class="col-md-12 p-1">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Ma code
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" id="code" placeholder="Nhập code" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 p-1">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Nam Xuat Ban
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" id="nxb" placeholder="Nhâp nam xuat ban" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <input type="button" class="btn btn-primary" id="themmoi" value="nhap sach" />
+        </div>
+
+    </div>
+</div>
+@section scripts{
+    <script>
+        var sachchitiet = {
+            init: function () {
+                $("#themmoi").click(function () {
+                    sachchitiet.save();
+
+                });
+            },
+            save: function () {
+                var code = $("#code").val();
+                
+                if (code == null || code == "") {
+                    _layout.showtoast("Nhập mã code của sách");
+                    return;
+                }
+                var nxb = $("#nxb").val();
+                if (nxb == null || nxb == "") {
+                    _layout.showtoast("Nhập nam xuat ban");
+                    return;
+                }
+                var form = new FormData();
+                form.append("code", code);
+                form.append("namxb", nxb);
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'Json',
+                    contentType: false,
+                    processData: false,
+                    data: form,
+                    url: '/Admin/Sachchitiet/Save/',
+                    success: function (res) {
+                        _layout.showtoast("Nhập thành công!");
+                        $("#code").val("");
+                    }
+                })
+            },
+        }
+        sachchitiet.init();
+    </script>
+    }

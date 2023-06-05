@@ -32,6 +32,7 @@ namespace GUIs.Areas.Admin.Controllers
             nxb.InsertOrUpdate(item);
             return RedirectToAction("Index");
         }
+       
         public ActionResult Edit(int? id)
         {
             NhaXuatBanDAO nxb = new NhaXuatBanDAO();

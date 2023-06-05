@@ -1,17 +1,20 @@
 ﻿
-
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Trasach";
     Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
 }
+
+
 <div class="card">
     <div class="card-header">
         <h4>MƯỢN TRẢ SÁCH</h4>
     </div>
     <div class="card-body">
-        <div class=" row">
-            <a href="javascript:void(0)" class="btn btn-secondary">Mượn sách</a>
-            <a href="/Admin/Muontra/Trasach/" class="btn btn-danger">Trả sách</a>
+        <div class"row">
+            <div class="col-md-12">
+                <a href="/Admin/Muontra/Create" class="btn btn-danger"> Mượn sách</a>
+                <a hhref="javascript:void(0)" class="btn btn-secondary">Trả sách</a>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-6">
@@ -23,27 +26,27 @@
                                     Mã sách
                                 </span>
                             </div>
-                            <input type="text" class="form-control" id="Masach" placeholder="Nhập mã sách" />
+                            <input type="text" class="form-control" id="masach" />
                         </div>
                     </div>
                     <div class="col-md-12 p-1">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    Tên sách
+                                    Ten sach
                                 </span>
                             </div>
-                            <input type="text" class="form-control bg-white" id="Tensach" readonly="readonly" />
+                            <input type="text" class="form-control bg-white" id="tensach" readonly="readonly" />
                         </div>
                     </div>
                     <div class="col-md-12 p-1">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    Tác giả
+                                    Tac gia
                                 </span>
                             </div>
-                            <input type="text" class="form-control bg-white" id="Tacgia" readonly="readonly" />
+                            <input type="text" class="form-control bg-white" id="tacgia" readonly="readonly" />
                         </div>
                     </div>
                     <div class="col-md-12 p-1">
@@ -56,8 +59,9 @@
                             <input type="text" class="form-control bg-white" id="Tinhtrangsach" readonly="readonly" />
                         </div>
                     </div>
-                    <div class="col-md-12 p-1">
-                        <img src="~/Assets/Images/logo.png" style="width:60px;height:100px" />
+                    <div>
+                        <div>Anh bia</div>
+                        <img src="" style="width:200px;height:300px" />
                     </div>
                 </div>
             </div>
@@ -70,135 +74,115 @@
                                     Mã thẻ
                                 </span>
                             </div>
-                            <input type="text" class="form-control" id="Mathe" placeholder="Nhập mã thẻ bạn đọc" />
+                            <input type="text" class="form-control" id="mathe" />
                         </div>
                     </div>
                     <div class="col-md-12 p-1">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    Họ tên
+                                    Ho ten
                                 </span>
                             </div>
-                            <input type="text" class="form-control bg-white" id="Tenbandoc" readonly="readonly" />
+                            <input type="text" class="form-control bg-white" id="hoten" readonly="readonly" />
                         </div>
                     </div>
                     <div class="col-md-12 p-1">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    Địa chỉ
+                                    Dia chi
                                 </span>
                             </div>
-                            <input type="text" class="form-control bg-white" id="Diachi" readonly="readonly" />
+                            <input type="text" class="form-control bg-white" id="diachi" readonly="readonly" />
                         </div>
                     </div>
                     <div class="col-md-12 p-1">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    Tình trạng thẻ
+                                    Tinh trang the
                                 </span>
                             </div>
-                            <input type="text" class="form-control bg-white" id="Tinhtrangthe" readonly="readonly" />
+                            <input type="text" class="form-control bg-white" id="tinhtrangthe" readonly="readonly" />
                         </div>
                     </div>
-                    <div class="col-md-12 p-1">
-                        <img src="~/Assets/Images/logo.png" style="width:60px;height:100px" />
+                    <div class="row">
+                        <div>Hinh anh</div>
+                        <img src="" style="width:200px;height:300px" />
                     </div>
                 </div>
             </div>
         </div>
+        <br />
         <div class="row">
             <div class="col-md-12 text-center">
-                <button class="btn btn-danger" id="Chomuon">Cho mượn</button>
+                <button class="btn btn-danger" id="Trasach">Tra sach</button>
             </div>
         </div>
     </div>
 </div>
-@*
-- Khi nhập mã sách xong thì hiển thị (hàm tìm kiếm theo mã sách )thông tin về sách
-    - khi nhập mã thẻ - Thì hiển thị thông tin độc giả (tìm theo mã thẻ)
-    - Cho mượn (Insert ban ghi mới vào bảng mượn_trả)
-
-*@
+@*Bước 1: Thủ thư: Nhập code sách vào box - Hệ thống tự động tìm kiếm thông tin mm]ợn trả theo code
+    Bước 2: Hệ thống tự động điền thôn gtin mượn trả vòa các hộ box
+    Bầm nustrtar: Hệ tống tự động gán các thông tin trả sách: Ngày trả và tính trạng trả người nhận trả
+    
+    *@
 @section scripts{
     <script>
         var muontra = {
             init: function () {
-               // muontra.masachchange();
-               // muontra.sinhvienchange();
-                $("#Masach").change(function () {
-                    
-                    muontra.masachchange();                
-                });
-                $("#Mathe").change(function () {
-                    muontra.sinhvienchange();
-                });
-                $("#Chomuon").click(function () {
-                    muontra.Chomuon();
+                // muontra.masachchange();
+                // muontra.sinhvienchange();
+                $("#masach").change(function () {
+
+                    muontra.masachchange();
+                });               
+                $("#Trasach").click(function () {
+                    muontra.Trasach();
                 });
             },
             masachchange: function () {
-                var masach = $("#Masach").val();
+                var masach = $("#masach").val();
                 if (masach == null || masach == "") {
                     _layout.showtoast("Nhập ma sach");
                     return;
                 }
                 $.ajax({
-                    url: '/Admin/Muontra/TimSach/' + masach,
+                    url: '/Admin/Muontra/Timsach_Tra/' + masach,
                     type: 'get',
                     dataType: 'json',
                     success: function (res) {
-                       // alert(masach);
-                        $("#Tensach").val(res.data.Tensach);
-                      //  alert(res.data.Tensach);
-                        $("#Tacgia").val(res.data.Tacgia);
-                        $("#Tinhtrangsach").val(res.data.Tinhtrang);
+                        // alert(masach);
+                        $("#tensach").val(res.data.Tensach);
+                        //  alert(res.data.Tensach);
+                        $("#tacgia").val(res.data.Tentacgia);
+                        $("#Tinhtrangsach").val(res.data.TinhTrangMuon);
+                        $("#mathe").val(res.data.MSSV);
+                        $("#hoten").val(res.data.HotenSv);
+                        $("#diachi").val(res.data.Tenlop);
+                        $("#tinhtrangthe").val(res.data.Tinhtrangthe);
                     }
                 })
             },
-            sinhvienchange: function () {
-                var mathe = $("#Mathe").val();
-                if (mathe == null || mathe== "") {
-                    _layout.showtoast("Nhập ma the");
-                }
-                $.ajax({
-                    url: '/Admin/Muontra/TimSinhvien/' + mathe,
-                    type: 'get',
-                    dataType: 'json',
-                    success: function (res) {
-                        $("#Tenbandoc").val(res.data.Hoten);
-                        $("#Diachi").val(res.data.Tenlop);
-                        $("#Tinhtrangthe").val(res.data.Ngaysinh);
-                    }
-                })
+            Trasach: function () {
+                var masach = $("#masach").val();
 
-            },
-            Chomuon: function () {
-                var Masach = $("#Masach").val();
-
-                if (Masach == null || Masach == "") {
+                if (masach == null || masach == "") {
                     _layout.showtoast("Nhập ma sach");
                     return;
                 }
-                var Mathe = $("#Mathe").val();
-                if (Mathe == null || Mathe == "") {
-                    _layout.showtoast("Nhập ma the");
-                    return;
-                }
+               
                 $.ajax({
-                    url: '/Admin/Muontra/Save_Muon/',
+                    url: '/Admin/Muontra/Save_Tra/',
                     type: 'get',
                     dataType: 'json',
                     success: function (res) {
-                        $("#Masach").val("");
+                        $("#masach").val("");
                         _layout.showtoast(res.result);
                     }
                 })
 
             },
-
         }
         muontra.init();
     </script>

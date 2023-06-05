@@ -1,6 +1,16 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\QLTV",
+    "\\QLTV\\GUIs",
+    "\\QLTV\\GUIs\\Areas",
+    "\\QLTV\\GUIs\\Areas\\Admin",
+    "\\QLTV\\GUIs\\Areas\\Admin\\Controllers",
+    "\\QLTV\\GUIs\\Areas\\Admin\\Views",
+    "\\QLTV\\GUIs\\Areas\\Admin\\Views\\Lop",
+    "\\QLTV\\GUIs\\Uploads",
+    "\\QLTV\\GUIs\\Views"
   ],
+  "SelectedNode": "\\QLTV\\GUIs\\Areas\\Admin\\Views\\Lop\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }

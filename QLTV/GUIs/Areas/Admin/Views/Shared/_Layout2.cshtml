@@ -23,7 +23,17 @@
 </head>
 
 <body id="page-top">
-
+    <div class="toast" id="toastf" role="alert" data-delay="3000" aria-live="assertive" aria-atomic="true" style="position:absolute;top:60px;right:0;z-index:999999">
+        <div class="toast-header">
+            <img src="~/Images/icon/logodtn.png" class="rounded mr-2" style="height : 0px;width : 0px;">
+            <strong class="mr-auto">Thông báo</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body" id="toast-message">
+        </div>
+    </div>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -67,6 +77,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Quan Ly Thu Vien</h6>
+
                         <!--@Html.ActionLink("Thếm sách", "Create", "Sach", new { area = "Admin" }, new { @class = "collapse-item" })--><!-- Sinh ra 1 thẻ a: <a href='/Admin/Sach/Create/'>Theem sacsh</a>-->
                         @Html.ActionLink("Quan ly Nhân viên", "Index", "Nhanvien", new { area = "Admin" }, new { @class = "collapse-item" })
                         @Html.ActionLink("Quan ly sinh vien", "Index", "Sinhvien", new { area = "Admin" }, new { @class = "collapse-item" })
@@ -91,16 +102,16 @@
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Quan ly sinh vien :</h6>
-                        
-                       <a class="collapse-item" href="utilities-color.html">Colors</a>
-                    <a class="collapse-item" href="utilities-border.html">Borders</a>
-                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                    <a class="collapse-item" href="utilities-other.html">Other</a>
+
+                        <a class="collapse-item" href="utilities-color.html">Colors</a>
+                        <a class="collapse-item" href="utilities-border.html">Borders</a>
+                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                        <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
             </li>
-           
-        
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -439,7 +450,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="~/Assets/Themes2/js/sb-admin-2.min.js"></script>
-     @RenderSection("scripts",required:false)
+    <script src="~/Scripts/admin/_layout.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>

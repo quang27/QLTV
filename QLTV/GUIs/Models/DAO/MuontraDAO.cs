@@ -12,7 +12,7 @@ namespace GUIs.Models.DAO
         dbContext context = new dbContext();
         public void InsertOrUpdate(MUONTRA item)
         {
-            if(item.ID==null)
+            if(item.ID==0)
             {
                 context.MUONTRA.Add(item);
             }
@@ -22,6 +22,30 @@ namespace GUIs.Models.DAO
         {
 
             return context.MUONTRA.Where(x => x.ID == id).FirstOrDefault();
+        }
+        public MuontraVIEW getItemTraView(String code)
+        {
+            var query = (from a in context.MUONTRA
+                         join c in context.SACHCHITIET on a.SachCTId equals c.MaCT
+                         join b in context.SINHVIEN on a.SVId equals b.ID
+                         join d in context.SACH on c.MaSach equals d.ID
+                         join e in context.TACGIASACH on d.ID equals e.MaSach
+                         join f in context.TACGIA on e.TacgiaId equals f.ID
+                         join g in context.LOP on b.LopID equals g.ID
+                         where (a.NgayTra == null && c.MaCode==code)
+                         select new MuontraVIEW
+                         {
+                             ID=a.ID,
+                             Tensach=d.TenSach,
+                             Tentacgia=f.Tentacgia,
+                             TinhTrangMuon=a.TinhTrangMuon,
+                             SVId=b.ID,
+                             HotenSv=b.HoTen,
+                             Tenlop=g.TenLop,
+                             MSSV=b.MaSV,
+                             Tinhtrangthe=b.Trangthaithe??true//Nếu b.tinhtrangthe == null thì mặc định là true;
+                         }).FirstOrDefault();
+            return query;
         }
         public MuontraVIEW getItemView(int id)
         {

@@ -135,6 +135,7 @@
     <Compile Include="Areas\Admin\Controllers\NhanVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhaXuatBanController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhanloaisachController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SachchitietController.cs" />
     <Compile Include="Areas\Admin\Controllers\SachController.cs" />
     <Compile Include="Areas\Admin\Controllers\SinhvienController.cs" />
     <Compile Include="Areas\Admin\Controllers\TacgiaController.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Models\DAO\NhanVienDAO.cs" />
     <Compile Include="Models\DAO\NhaXuatBanDAO.cs" />
     <Compile Include="Models\DAO\PhanloaisachDAO.cs" />
+    <Compile Include="Models\DAO\SachchitietDAO.cs" />
     <Compile Include="Models\DAO\SachDAO.cs" />
     <Compile Include="Models\DAO\SinhvienDAO.cs" />
     <Compile Include="Models\DAO\TacgiaDAO.cs" />
@@ -170,6 +172,7 @@
     <Compile Include="Models\VIEW\NhanVienVIEW.cs" />
     <Compile Include="Models\VIEW\NhaXuatBanVIEW.cs" />
     <Compile Include="Models\VIEW\PhanloaisachVIEW.cs" />
+    <Compile Include="Models\VIEW\SachchitietVIEW.cs" />
     <Compile Include="Models\VIEW\SachVIEW.cs" />
     <Compile Include="Models\VIEW\SinhvienVIEW.cs" />
     <Compile Include="Models\VIEW\TacgiasachVIEW.cs" />
@@ -2011,6 +2014,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\admin\_layout.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -2484,6 +2488,8 @@
     <Content Include="Areas\Admin\Views\Tacgiasach\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Muontra\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Muontra\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Muontra\Trasach.cshtml" />
+    <Content Include="Areas\Admin\Views\Sachchitiet\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

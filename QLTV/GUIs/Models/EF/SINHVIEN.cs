@@ -33,6 +33,7 @@ namespace GUIs.Models.EF
         public string UserName { get; set; }
 
         public int? LopID { get; set; }
+        public bool? Trangthaithe { get; set;}
 
         public virtual LOP LOP { get; set; }
 

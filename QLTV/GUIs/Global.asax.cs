@@ -16,6 +16,15 @@ namespace GUIs
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Application["Count"] = 0;
+        }
+        protected void Session_Start()
+        {
+            Application["Count"] = Convert.ToInt16(Application["Count"]) + 1;
+        }
+        protected void Session_End()
+        {
+            Application["Count"] = Convert.ToInt16(Application["Count"]) - 1;
         }
     }
 }

@@ -29,6 +29,7 @@ namespace GUIs.Models.EF
 
         [StringLength(20)]
         public string MaCode { get; set; }
+        public bool? Trangthai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MUONTRA> MUONTRA { get; set; }
