@@ -74,6 +74,7 @@ namespace GUIs.Models.DAO
                          join d in context.TACGIASACH on c.ID equals d.MaSach
                          join e in context.TACGIA on d.TacgiaId equals e.ID
                          join f in context.SINHVIEN on a.SVId equals f.ID
+
                          select new MuontraVIEW
                          {
                              ID = a.ID,
@@ -91,6 +92,8 @@ namespace GUIs.Models.DAO
                              Baomat = a.Baomat,
                              Hantra=a.Hantra
                          }).ToList();
+            //skip(10) - bỏ qua 10 bản ghi đầu tiên
+            //take(10) - lấy 10 bảng ghi
             return query;
         }
         public void Delete(int id)

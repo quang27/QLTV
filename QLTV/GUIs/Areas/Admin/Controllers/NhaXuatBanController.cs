@@ -15,7 +15,13 @@ namespace GUIs.Areas.Admin.Controllers
         // GET: Admin/NhaXuatBan
         public ActionResult Index()
         {
-            
+            List<Lopchung> pagesize = new List<Lopchung>();
+            pagesize.Add(new Lopchung { ID = 10 });
+            pagesize.Add(new Lopchung { ID = 20 });
+            pagesize.Add(new Lopchung { ID = 30 });
+            pagesize.Add(new Lopchung { ID = 40 });
+            pagesize.Add(new Lopchung { ID = 50 });
+            ViewBag.Pagesize = pagesize;
             return View();
         }
         public ActionResult Create()
@@ -55,10 +61,11 @@ namespace GUIs.Areas.Admin.Controllers
             nxb.Delete(id);
             return RedirectToAction("Index");
         }
-        public JsonResult Search(String TenNxb)
+        public JsonResult Search(String TenNxb="",int index=1,int size=10)
         {
             NhaXuatBanDAO nxb = new NhaXuatBanDAO();
-            var query = nxb.Search(TenNxb);
+            int total = 0;
+            var query = nxb.Search(TenNxb,out total,index,size);
             String text = "";
             int i = 1;
             foreach(var item in query)
@@ -73,7 +80,8 @@ namespace GUIs.Areas.Admin.Controllers
                 text += "<a href='/Admin/NhaXuatBan/Delete/" + item.ID + "'><i class='fa fa-trash' aria-hidden='true'></i>";
                 text += "</td> </tr>";
             }
-            return Json(new { data=text}, JsonRequestBehavior.AllowGet);
+            string pages = Support.Support.InTrang(total, index, size);
+            return Json(new { data=text,page=pages}, JsonRequestBehavior.AllowGet);
         }
 
     }

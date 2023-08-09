@@ -46,7 +46,7 @@ namespace GUIs.Models.DAO
                              ).ToList();
             return query;
         }
-        public List<LopVIEW> Search(String ten)
+        public List<LopVIEW> Search(String ten, out int total, int index = 1, int size = 10)
         {
             var query = (from a in context.LOP
                          where (a.TenLop.Contains(a.TenLop))
@@ -54,8 +54,8 @@ namespace GUIs.Models.DAO
                          {
                              Id = a.ID,
                              Tenlop = a.TenLop
-                         }
-                              ).ToList();
+                         }).Skip((index-1)*size).Take(size).ToList();
+            total = query.Count();
             return query;
         }
         public void Detele(int id)

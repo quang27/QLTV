@@ -15,6 +15,14 @@ namespace GUIs.Areas.Admin.Controllers
         // GET: Admin/NhanVien
         public ActionResult Index()
         {
+            List<Lopchung> pagesize = new List<Lopchung>();
+            pagesize.Add(new Lopchung { ID = 10 });
+            pagesize.Add(new Lopchung { ID = 20 });
+            pagesize.Add(new Lopchung { ID = 30 });
+            pagesize.Add(new Lopchung { ID = 40 });
+            pagesize.Add(new Lopchung { ID = 50 });
+            ViewBag.Pagesize = pagesize;
+         
             return View(); //Json(new { data = text, thongbao = "Số bản ghi tìm thấy: " + query.Count() }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Create()
@@ -74,12 +82,13 @@ namespace GUIs.Areas.Admin.Controllers
             x.Detele(id);
             return RedirectToAction("Index");
         }
-        public JsonResult Search(String ten="")
+        public JsonResult Search(String ten="",int index=1,int size=10)
         {
             NhanVienDAO nhanvien = new NhanVienDAO();
             String text = "";
             int i = 1;
-            var query = nhanvien.getList(ten);
+            int total = 0;
+            var query = nhanvien.GetList(ten,out total,index,size);
             foreach (var item in query)
             {
                 text += "<tr> <td>" + i++ + "</td>";
@@ -93,7 +102,8 @@ namespace GUIs.Areas.Admin.Controllers
                 text += "</td>";
                 text += " </tr>";
             }
-            return Json(new { data = text, thongbao = "Số bản ghi tìm thấy: " + query.Count() }, JsonRequestBehavior.AllowGet);
+            string pages = Support.Support.InTrang(total, index, size);
+            return Json(new { data = text, thongbao = "Số bản ghi tìm thấy: " + query.Count(),page=pages }, JsonRequestBehavior.AllowGet);
         }
 
 

@@ -23,7 +23,8 @@ namespace GUIs.Areas.Admin.Controllers
         public JsonResult getSinhvien(int id) {
             Session[LOPID] = id;
             SinhvienDAO sv = new SinhvienDAO();
-            var query = sv.getList(id);
+           
+            var query = sv.getList(id) ;
             int i = 1;
             string text = "";
             foreach (var item in query)
@@ -42,8 +43,8 @@ namespace GUIs.Areas.Admin.Controllers
                 text += "</td>";
                 text += "<td> </td> </tr>";
             }
-            string mess = "Số bản ghi tìm thấy: " + query.Count();
-            return Json(new { data = text, mess = mess }, JsonRequestBehavior.AllowGet);
+           
+            return Json(new { data = text}, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Create(){
         

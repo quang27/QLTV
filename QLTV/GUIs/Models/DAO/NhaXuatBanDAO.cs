@@ -49,7 +49,7 @@ namespace GUIs.Models.DAO
             return query;
         }
        
-        public List<NhaXuatBanVIEW> Search(String tenNXB="")
+        public List<NhaXuatBanVIEW> Search(String tenNXB,out int total,int index=1,int size=10)
         {
             var query = (from a in context.NHAXUATBAN
                          where (a.TenNXB.Contains(tenNXB))
@@ -59,7 +59,11 @@ namespace GUIs.Models.DAO
                              TenNXB = a.TenNXB,
                              DiaChi = a.DiaChi
                          }).ToList();
-            return query;
+            total = query.Count;
+
+            var  result = query.Skip((index - 1) * size).Take(size).ToList();
+
+            return result;
         }
         public void Delete(int id)
         {

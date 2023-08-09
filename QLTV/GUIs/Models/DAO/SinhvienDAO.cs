@@ -62,7 +62,7 @@ namespace GUIs.Models.DAO
         /// </summary>
         /// <param name="Lopid">Mã lớp</param>
         /// <returns></returns>
-        public List<SinhvienVIEW> getList(int Lopid)
+        public List<SinhvienVIEW> getList(int Lopid,out int total,int index,int size)
             {
             var query = (from a in context.SINHVIEN   
                          join b in context.LOP on a.LopID equals b.ID
@@ -76,10 +76,27 @@ namespace GUIs.Models.DAO
                              Ngaysinh = a.NgaySinh,
                              Username = a.UserName
                          }).ToList();
+            total = query.Count;
+           var result = query.Skip((index - 1) * size).Take(size).ToList();
+            return result;
+        }
+        public List<SinhvienVIEW> getList(int Lopid)
+        {
+            var query = (from a in context.SINHVIEN
+                         join b in context.LOP on a.LopID equals b.ID
+                         where b.ID == Lopid
+                         select new SinhvienVIEW
+                         {
+                             ID = a.ID,
+                             Hoten = a.HoTen,
+                             MaSV = a.MaSV,
+                             Tenlop = b.TenLop,
+                             Ngaysinh = a.NgaySinh,
+                             Username = a.UserName
+                         }).ToList();
+           
             return query;
         }
-        
-        
 
         public List<SinhvienVIEW> Search(String mssv)
         {

@@ -12,11 +12,18 @@ namespace GUIs.Models.DAO
         private dbContext context = new dbContext();
         public void InsertOrUpdate(NHANVIEN item)
         {
-            if (item.ID == 0)
+            try
             {
-                context.NHANVIEN.Add(item);
+                if (item.ID == 0)
+                {
+                    context.NHANVIEN.Add(item);
+                }
+                context.SaveChanges();
             }
-            context.SaveChanges();
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
+            }
         }
         public NHANVIEN getItem(int id)
         {
@@ -37,10 +44,10 @@ namespace GUIs.Models.DAO
                          }).FirstOrDefault();
             return query;
         }
-        public List<NhanVienVIEW> getList(String ten="")
+        public List<NhanVienVIEW> GetList(string ten , out int total, int index = 1, int size = 10)
         {
             var query = (from a in context.NHANVIEN
-                         where (a.TenNV.Contains(ten))
+                         where a.TenNV.Contains(ten)
                          select new NhanVienVIEW
                          {
                              ID = a.ID,
@@ -48,8 +55,15 @@ namespace GUIs.Models.DAO
                              Email = a.Email,
                              SDT = a.SDT
                          }).ToList();
-            return query;
+
+            total = query.Count;
+
+            var result = query.Skip((index - 1) * size).Take(size).ToList();
+
+            return result;
         }
+
+
         public void Detele(int id)
         {
             NHANVIEN x = getItem(id);

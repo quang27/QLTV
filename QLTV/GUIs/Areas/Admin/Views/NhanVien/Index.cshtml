@@ -9,8 +9,9 @@
     @Html.ActionLink("Create New", "Create")
     <br />
     <label>Ten nhan vien</label>
-    <input type="text" placeholder="Ten Nhan Vien" id="tennhanvien"/>
+    <input type="text" placeholder="Ten Nhan Vien" id="tennhanvien" />
     <button class="btn btn-primary" id="search">Tim kiem</button>
+    @Html.DropDownList("Pagesize", new SelectList(ViewBag.Pagesize, "ID", "ID"), new { @class = "form-control" })
 </p>
 <table class="table">
     <tr>
@@ -34,6 +35,13 @@
     <tbody id="tbData">
         
     </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="100" id="pages">
+
+            </th>
+        </tr>
+    </tfoot>
    
     
 
@@ -44,16 +52,21 @@
 
     var nhanvien = {
         init: function () {
-            nhanvien.search();
+            nhanvien.search(1);
             $("#search").click(function () {
-                nhanvien.search();
+                nhanvien.search(1);
+            });
+            $("#Pagesize").change(function () {
+                nhanvien.search(1);
             });
         },
-        search: function () {
+        search: function (index) {
             var tennhanvien = $("#tennhanvien").val();
+            var size = $("#Pagesize").val();
             var form = new FormData()
-            form.append("ten",tennhanvien);
-
+            form.append("ten", tennhanvien);
+            form.append("size", size);
+            form.append("index", index);
            $.ajax({
                 type: 'POST',
                dataType: 'Json',
@@ -63,12 +76,15 @@
                url: '/Admin/Nhanvien/Search/',
                success: function (res) {
                    $("#tbData").html(res.data);
-                  
+                   $("#pages").html(res.page);
                },            
             });
-        }
+        },
+
     }
     nhanvien.init();
-        
+    function goto(i) {
+        nhanvien.search(i);
+    }
 </script>
     }

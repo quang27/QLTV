@@ -9,6 +9,11 @@ using System.Web.Mvc;
 
 namespace GUIs.Areas.Admin.Controllers
 {
+    public class Lopchung
+    {
+        public int ID { set; get; }
+        public string Name { set; get; }
+    }
     public class SachController : Controller
     {
 
@@ -22,6 +27,13 @@ namespace GUIs.Areas.Admin.Controllers
             ViewBag.listnxb = item;
             PhanloaisachDAO phanloai = new PhanloaisachDAO();
             var items = phanloai.getList();
+            List<Lopchung> pagesize = new List<Lopchung>();
+            pagesize.Add(new Lopchung { ID = 10 });
+            pagesize.Add(new Lopchung { ID = 20 });
+            pagesize.Add(new Lopchung { ID = 30 });
+            pagesize.Add(new Lopchung { ID = 40 });
+            pagesize.Add(new Lopchung { ID = 50 });
+            ViewBag.Pagesize = pagesize;
             ViewBag.listphanloai = items;
             return View();
         }
@@ -138,13 +150,14 @@ namespace GUIs.Areas.Admin.Controllers
             sach.Detele(id);
             return RedirectToAction("Index");
         }
-        public JsonResult Search(String tensach,int phanloai=0,int nhaxb=0)
+        public JsonResult Search(String tensach,int phanloai=0,int nhaxb=0,int index=1,int size=10)
         {
             SachDAO sach = new SachDAO();
             Session[NXBID] = nhaxb;
             Session[PHANLOAIID] = phanloai;
             //Buoc 1 - thiet lap cac session
-            var query = sach.getList(tensach,phanloai,nhaxb);
+            int total = 0;
+            var query = sach.getList(tensach,phanloai,nhaxb,out total,index,size);
             String text = "";
             int i = 1;
             foreach(var item in query)
@@ -163,7 +176,8 @@ namespace GUIs.Areas.Admin.Controllers
                 text += "<td><a href='/Admin/Sachchitiet/Index/" + item.ID + "'><i class='fa fa-edit' aria-hidden='true'></i></td>";
                 text += "</tr>";
             }
-            return Json(new {data=text },JsonRequestBehavior.AllowGet);
+            string pages = Support.Support.InTrang(total, index, size);
+            return Json(new {data=text,page=pages },JsonRequestBehavior.AllowGet);
         }
     }
 }

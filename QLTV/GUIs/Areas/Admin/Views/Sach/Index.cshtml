@@ -15,7 +15,7 @@
 
     @Html.DropDownList("NhaXuatBan", new SelectList(ViewBag.listnxb, "ID", "TenNXB"), new { @class = "form-control" })
     @Html.DropDownList("PhanLoai", new SelectList(ViewBag.listphanloai, "ID", "TenPhanLoai"), new { @class = "form-control" })
-
+    @Html.DropDownList("Pagesize", new SelectList(ViewBag.Pagesize, "ID", "ID"), new { @class = "form-control" })
 
 
 </p>
@@ -46,6 +46,13 @@
         <th>Them dau sach</th>
     </tr>
     <tbody id="tbData"></tbody>
+    <tfoot>
+        <tr>
+            <th colspan="100" id="pages">
+
+            </th>
+        </tr>
+    </tfoot>
 </table>
 
  
@@ -107,15 +114,18 @@
 
         var sach = {
             init: function () {
-                sach.search();
+                sach.search(1);
                 $("#tensach").change(function () {
-                    sach.search();
+                    sach.search(1);
                 });
                 $("#NhaXuatBan").change(function () {
-                    sach.search();
+                    sach.search(1);
                 });
                 $("#PhanLoai").change(function () {
-                    sach.search();
+                    sach.search(1);
+                });
+                $("#Pagesize").change(function () {
+                    sach.search(1);
                 });
                 $("#btnthemtacgia").click(function () {
                     var idsach = $("#sachid").val();
@@ -160,14 +170,17 @@
                     }
                 });
             }, 
-            search: function () {
+            search: function (index) {
                 var tensach = $("#tensach").val();
                 var phanloai = $("#PhanLoai").val();
                 var nxb = $("#NhaXuatBan").val();
+                var size = $("#Pagesize").val();
                 var form = new FormData()
                 form.append("tensach", tensach);
                 form.append("phanloai", phanloai);
                 form.append("nhaxb", nxb);
+                form.append("index", index);
+                form.append("size", size);
                 $.ajax({
                     type: 'POST',
                     dataType: 'Json',
@@ -177,7 +190,7 @@
                     url: '/Admin/Sach/Search/',
                     success: function (res) {
                         $("#tbData").html(res.data);
-
+                        $("#pages").html(res.page);
 
                     },
                 });
@@ -187,6 +200,8 @@
             }
         }
         sach.init();
-
+        function goto(i) {
+            sach.search(i);
+        }
     </script>
 }

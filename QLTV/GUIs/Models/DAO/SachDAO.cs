@@ -43,7 +43,7 @@ namespace GUIs.Models.DAO
                          }).FirstOrDefault();
             return query;
         }
-        public List<SachVIEW> getList(String tensach,String phanloai)
+        public List<SachVIEW> getList(String tensach,int phanloai,int  nhaxb,out int total, int index=1,int size=10)
         {
             var query = (from a in context.SACH
                          join b in context.NHAXUATBAN on a.NXBId equals b.ID
@@ -65,10 +65,12 @@ namespace GUIs.Models.DAO
             {
                 query = query.Where(x => x.TenSach.Contains(tensach)).ToList();
             }
-            if(phanloai!="")
-            {
-                query = query.Where(x => x.Phanloai.Contains(phanloai)).ToList();
-            }
+            //if(phanloai!="")
+            //{
+            //    query = query.Where(x => x.Phanloai.Contains(phanloai)).ToList();
+            //}
+            total = query.Count;
+            query = query.Skip((index - 1) * size).Take(size).ToList();
             return query;
         }
         public List<SachVIEW> getList(String tensach, int phanloaiid=0,int nhaxbid=0)

@@ -178,6 +178,7 @@
     <Compile Include="Models\VIEW\TacgiasachVIEW.cs" />
     <Compile Include="Models\VIEW\TacgiaVIEW.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Support\Support.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Themes2\css\sb-admin-2.css" />
